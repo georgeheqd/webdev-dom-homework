@@ -120,7 +120,7 @@ const renderComments = () =>{
         comments[indexUserLike].likes -= 1;
         comments[indexUserLike].isLiked = '';
       }
-     renderComments();
+     renderComments(commentsServer);
 
     })
   }
