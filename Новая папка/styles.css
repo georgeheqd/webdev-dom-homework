@@ -119,7 +119,7 @@ body {
 
   .add-form-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
   }
 
   .add-form-button {
@@ -134,25 +134,4 @@ body {
 
   .add-form-button:hover {
     opacity: 0.9;
-  }
-
-  .delete-button{
-    background: #7334ea;
-
-    box-sizing: border-box;
-
-    width: 220px;
-    color: #FFFFFF;
-
-    line-height: 22px;
-    text-align: center;
-    transition: all 0.5s;
-
-    margin-top: 24px;
-    font-size: 24px;
-    padding: 10px 20px;
-
-    border: none;
-    border-radius: 18px;
-    cursor: pointer;
   }
