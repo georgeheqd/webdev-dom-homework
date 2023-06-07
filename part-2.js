@@ -169,7 +169,8 @@
     const commentElement = document.getElementById("comment");
     const nameInputElement = document.getElementById("name-input");
     const textInputElement = document.getElementById("text-input");
-    let commentsServer = [];
+    let comments = []
+    
 
     function getComments() {
   const fetchPromise = fetch('https://webdev-hw-api.vercel.app/api/v1/george-kuznecov/comments', {
@@ -179,8 +180,8 @@
   fetchPromise.then((response) => {
     const jsonPromise = response.json();
     jsonPromise.then((responseData) => {
-      commentsServer = responseData.comments;
-      renderComments(commentsServer);
+      comments = responseData.comments;
+      renderComments(comments);
     });
   });
 }
@@ -197,7 +198,7 @@
       return dateNumber + "." + dateMonth +"."+ dateYear + " "+ dateHours +":"+dateMinutes;
     }
 
-    const addNewElToList = (commentsServer) =>{
+    const addNewElToList = () =>{
 
       nameInputElement.classList.remove("error");
       textInputElement.classList.remove("error");
@@ -253,22 +254,21 @@
     }
 
     buttonElement.addEventListener("click",() => {
-      addNewElToList(commentsServer);
+      addNewElToList();
 
     });
 
 
     function removeLastElement() {
       comments.pop();
-      renderComments(commentsServer);
+      renderComments();
     }
 
 
 
-    const comments = []
 
-    const renderComments = (commentsServer) =>{
-      const commentsHTML = commentsServer
+    const renderComments = () =>{
+      const commentsHTML = comments
       .map((comment, index) => {
        return `<li id= "comment" class="comment" data-index="${index}">
            <div class="comment-header">
@@ -283,7 +283,7 @@
             <div class="comment-footer">
               <div class="likes" data-index="${index}">
                 <span class="likes-counter" data-index="${index}">${comment.likes}</span>
-                <button class= "like-button ${comment.isLiked}" data-index="${index}"></button>
+                <button class= "like-button ${comment.isLiked ? '-active-like' : '' }" data-index="${index}"></button>
               </div>
             </div>
          </li>`;
@@ -305,15 +305,16 @@
         userLike.addEventListener('click',(event) => {
           event.stopPropagation();
           const indexUserLike = userLike.dataset.index;
-
-          if (comments[indexUserLike].isLiked === '') {
+          console.log(indexUserLike)
+          console.log(comments)
+          if (comments[indexUserLike].isLiked === false) {
               comments[indexUserLike].likes += 1;
-              comments[indexUserLike].isLiked = '-active-like';
+              comments[indexUserLike].isLiked = true;
           } else{
               comments[indexUserLike].likes -= 1;
-              comments[indexUserLike].isLiked = '';
+              comments[indexUserLike].isLiked = false;
             }
-          renderComments(commentsServer);
+          renderComments();
 
         })
       }
@@ -329,4 +330,4 @@
 
     }
 
-    renderComments(commentsServer);
+    renderComments();
