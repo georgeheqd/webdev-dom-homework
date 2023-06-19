@@ -6,7 +6,18 @@
     const textInputElement = document.getElementById("text-input");
     let comments = []
     
-
+   // window.load = function () {
+    //  buttonElement.disabled = true;
+     //  buttonElement.textContent = 'Комментарии загружаются, подождите...';
+//
+  //  }
+    window.onload = function () {
+      document.body.classList.add('loaded_hiding');
+      window.setTimeout(function () {
+        document.body.classList.add('loaded');
+        document.body.classList.remove('loaded_hiding');
+      }, 500);
+    }
     function getComments() {
       const fetchPromise = fetch('https://webdev-hw-api.vercel.app/api/v1/george-kuznecov/comments', {
         method: "GET",
